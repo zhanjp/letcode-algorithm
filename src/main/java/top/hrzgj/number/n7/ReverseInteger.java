@@ -19,24 +19,14 @@ public class ReverseInteger {
             x = Math.abs(x);
         }
         // 判断数字的位数
-        int b = 0;
-        int n = 1;
-        // 用一个数组记录数字
-        int[] digits = new int[10];
-        while (x != 0) {
-            // 算出最大位数的单位
-            n = (int) Math.pow(10, b);
-            // 取出，每一个数字记到数组中
-            digits[b++] = x % 10;
-            x /= 10;
-        }
-        // 循环位数，累加
         int res = 0;
-        for (int i = 0; i < b; i++) {
-            // 判断数字是否越界
-            if ((Integer.MAX_VALUE - res) / n >= digits[i]) {
-                res += digits[i] * n;
-                n = n / 10;
+        while (x != 0) {
+            // 取出每一个数字
+            int b = x % 10;
+            x /= 10;
+            // 判断溢出
+            if ((Integer.MAX_VALUE - b) / 10 >= res) {
+                res = res * 10 + b;
             } else {
                 return 0;
             }
@@ -45,6 +35,7 @@ public class ReverseInteger {
     }
 
     public static void main(String[] args) {
-        System.out.println(new ReverseInteger().reverse(1563847412));
+        System.out.println(Integer.MAX_VALUE);
+        System.out.println(new ReverseInteger().reverse(1463847412));
     }
 }
